@@ -31,16 +31,17 @@
             $('#pages').html("");
             var lines = $('#domains').val().split('\n');
             for(var i = 0;i < lines.length;i++){
-
-                $('<div class="col-sm-3">'+
-                        '<div class="card" style="width: 21rem;">' +
-                            '<div class="card-body">' +
-                                '<h5 class="card-title"><a href="https://' + lines[i].trim() + '" target="_blank">' + lines[i].trim() + '</h5>' +
-                                '<iframe src="https://' + lines[i].trim() + '" frameborder="0" scrolling="no" id="myFrame" height="400px"></iframe>' +
+                if(lines[i] !=""){
+                    $('<div class="col-sm-3">'+
+                            '<div class="card" style="width: 21rem;">' +
+                                '<div class="card-body">' +
+                                    '<h5 class="card-title"><a href="https://' + lines[i].trim() + '" target="_blank">' + lines[i].trim() + '</h5>' +
+                                    '<iframe src="https://' + lines[i].trim() + '" frameborder="0" scrolling="no" id="myFrame" height="400px"></iframe>' +
+                                '</div>' +
                             '</div>' +
-                        '</div>' +
-                    '</div>')
-                .appendTo('#pages');
+                        '</div>')
+                    .appendTo('#pages');
+                }
             }
         })
     </script>
