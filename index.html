@@ -23,7 +23,6 @@
 
     <script>
         $('#reload').on('click', () => {
-            console.log(123)
             $('#domains').trigger("change")
         })
 
@@ -32,11 +31,13 @@
             var lines = $('#domains').val().split('\n');
             for(var i = 0;i < lines.length;i++){
                 if(lines[i] !=""){
+
+                    url = processURL(lines[i])
                     $('<div class="col-sm-3">'+
                             '<div class="card" style="width: 21rem;">' +
                                 '<div class="card-body">' +
-                                    '<h5 class="card-title"><a href="https://' + lines[i].trim() + '" target="_blank">' + lines[i].trim() + '</h5>' +
-                                    '<iframe src="https://' + lines[i].trim() + '" frameborder="0" scrolling="no" id="myFrame" height="400px"></iframe>' +
+                                    '<h5 class="card-title"><a href="' + url + '" target="_blank">' + url + '</h5>' +
+                                    '<iframe src="' + url + '" frameborder="0" scrolling="no" id="myFrame" height="400px"></iframe>' +
                                 '</div>' +
                             '</div>' +
                         '</div>')
@@ -44,6 +45,25 @@
                 }
             }
         })
+
+        function processURL(url){
+            url = validateHttp(url);
+            url = url.trim();
+
+            if(url.substring(url.length-1) != "/"){
+                url += "/";
+            }
+            
+            return url;
+        }
+
+        function validateHttp(url)
+        {
+            if (!/(http|https)/.test(url)) {
+                return "https://" + url;
+            }
+            return url;
+        }
     </script>
 </body>
 </html>
